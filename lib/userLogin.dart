@@ -49,14 +49,14 @@ class _loginPageState extends State<loginPage> {
                       decoration: InputDecoration(
                           hintText: 'Enter Password',
                           filled: true,
-                          fillColor: Colors.white.withOpacity(0.8),
+                          fillColor: Colors.grey.shade100,
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10)
                           )
                       ),
                     ),
                     SizedBox(
-                      height: 400,
+                      height: 150,
                     ),
                     Row(
                       children: [
