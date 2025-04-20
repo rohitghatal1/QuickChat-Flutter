@@ -5,22 +5,26 @@ import 'package:flutter/material.dart';
 void main() {
   runApp(MaterialApp(
     theme: ThemeData(
-      colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal,
-          brightness: Brightness.light),
-      scaffoldBackgroundColor: Colors.white,
-      appBarTheme: AppBarTheme(
-        backgroundColor: Colors.teal,
-        foregroundColor: Colors.white,
-        elevation: 0
-      )
-    ),
+        fontFamily: "Poppins",
+        colorScheme: ColorScheme.fromSeed(
+            seedColor: Colors.teal, brightness: Brightness.light),
+        scaffoldBackgroundColor: Colors.white,
+        appBarTheme: AppBarTheme(
+            backgroundColor: Colors.teal,
+            foregroundColor: Colors.white,
+            elevation: 0),
+        tabBarTheme: TabBarTheme(
+          labelColor: Colors.white,
+          unselectedLabelColor: Colors.white70,
+          indicator: UnderlineTabIndicator(
+              borderSide: BorderSide(width: 3, color: Colors.white)),
+          labelStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+          unselectedLabelStyle: TextStyle(fontWeight: FontWeight.normal),
+          indicatorSize: TabBarIndicatorSize.tab,
+        )),
     home: Homescreen(),
     debugShowCheckedModeBanner: false,
     // initialRoute: 'login',
-    routes: {
-      'login' : (context) => loginPage()
-    },
+    routes: {'login': (context) => loginPage()},
   ));
 }
-
-

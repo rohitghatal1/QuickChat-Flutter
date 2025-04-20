@@ -1,3 +1,4 @@
+import "package:firt_flutter_app/Pages/ChatPage.dart";
 import "package:flutter/material.dart";
 
 class Homescreen extends StatefulWidget {
@@ -13,7 +14,7 @@ class _HomescreenState extends State<Homescreen> with SingleTickerProviderStateM
   void initState() {
     // TODO: implement initState
     super.initState();
-    _controller = TabController(length: 4, vsync: this, initialIndex: 0);
+    _controller = TabController(length: 4, vsync: this, initialIndex: 1);
   }
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,17 @@ class _HomescreenState extends State<Homescreen> with SingleTickerProviderStateM
         title: Text("QuickChat"),
         actions: [
           IconButton(onPressed: (){}, icon: Icon(Icons.search)),
-          IconButton(onPressed: (){}, icon: Icon(Icons.more_vert))
+         PopupMenuButton<String>(
+           onSelected: (value){
+             print(value);
+           },
+             itemBuilder: (BuildContext context){
+           return [
+             PopupMenuItem(child: Text("New Group"), value: "New Group",),
+             PopupMenuItem(child: Text("Starred Messages"), value: "Starred Messages",),
+             PopupMenuItem(child: Text("Settings"), value: "Settings",),
+           ];
+         })
         ],
         bottom: TabBar(
           controller: _controller,
@@ -42,6 +53,14 @@ class _HomescreenState extends State<Homescreen> with SingleTickerProviderStateM
           ],
         ),
       ),
+      body: TabBarView(
+        controller: _controller,
+          children: [
+        Text("camera"),
+        ChatPage(),
+        Text("Status"),
+        Text("Calls"),
+      ]),
     );
   }
 }
