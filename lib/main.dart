@@ -5,14 +5,18 @@ import 'package:flutter/material.dart';
 void main() {
   runApp(MaterialApp(
     theme: ThemeData(
-      primaryColor: Color(0xFF1976D2),
-      colorScheme: ColorScheme.fromSwatch().copyWith(
-        secondary: Color(0xFF64B5F6),
-      ),
+      colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal,
+          brightness: Brightness.light),
+      scaffoldBackgroundColor: Colors.white,
+      appBarTheme: AppBarTheme(
+        backgroundColor: Colors.teal,
+        foregroundColor: Colors.white,
+        elevation: 0
+      )
     ),
     home: Homescreen(),
     debugShowCheckedModeBanner: false,
-    initialRoute: 'login',
+    // initialRoute: 'login',
     routes: {
       'login' : (context) => loginPage()
     },
