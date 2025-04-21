@@ -1,8 +1,10 @@
+import 'package:firt_flutter_app/Model/ChatModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class CustomCard extends StatefulWidget {
-  const CustomCard({super.key});
+  final ChatModel chatModel;
+  const CustomCard({Key? key, required this.chatModel}) : super(key: key);
 
   @override
   State<CustomCard> createState() => _CustomCardState();
@@ -20,7 +22,7 @@ class _CustomCardState extends State<CustomCard> {
               radius: 25,
               backgroundColor: Colors.blueGrey,
               child: SvgPicture.asset(
-                "assets/groupIcon.svg",
+                "assets/${widget.chatModel.icon}",
                 width: 35,
                 height: 35,
                 color: Colors.white,
@@ -28,7 +30,7 @@ class _CustomCardState extends State<CustomCard> {
 
             ),
             title: Text(
-              "Rohit Ghatal",
+              widget.chatModel.name,
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
             ),
             subtitle: Row(
@@ -38,12 +40,12 @@ class _CustomCardState extends State<CustomCard> {
                   width: 3,
                 ),
                 Text(
-                  "Hi roht how are you",
+                  widget.chatModel.currentMessage,
                   style: TextStyle(fontSize: 13),
                 )
               ],
             ),
-            trailing: Text("18:04"),
+            trailing: Text(widget.chatModel.time),
           ),
           Padding(
             padding: const EdgeInsets.only(right: 10, left: 10),
