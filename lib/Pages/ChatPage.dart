@@ -1,3 +1,4 @@
+import 'package:firt_flutter_app/components/customCard.dart';
 import 'package:flutter/material.dart';
 
 class ChatPage extends StatefulWidget {
@@ -17,6 +18,12 @@ class _ChatPageState extends State<ChatPage> {
           onPressed: () {},
           child: Icon(Icons.chat),
         ),
+      ),
+      body: ListView(
+        children: [
+          CustomCard(),
+          CustomCard(),
+        ],
       ),
     );
   }
