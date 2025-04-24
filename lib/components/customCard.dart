@@ -1,10 +1,11 @@
 import 'package:firt_flutter_app/Model/ChatModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import '../Screens/IndividualPage.dart';
 
 class CustomCard extends StatefulWidget {
-  final ChatModel chatModel;
   const CustomCard({Key? key, required this.chatModel}) : super(key: key);
+  final ChatModel chatModel;
 
   @override
   State<CustomCard> createState() => _CustomCardState();
@@ -14,7 +15,9 @@ class _CustomCardState extends State<CustomCard> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: (){},
+      onTap: (){
+        Navigator.push(context, MaterialPageRoute(builder: (context) => IndividualPage(chatModel: widget.chatModel,)));
+      },
       child: Column(
         children: [
           ListTile(
