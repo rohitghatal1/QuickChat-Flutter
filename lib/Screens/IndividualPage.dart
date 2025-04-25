@@ -9,7 +9,6 @@ class IndividualPage extends StatefulWidget {
   @override
   State<IndividualPage> createState() => _IndividualPageState();
 }
-
 class _IndividualPageState extends State<IndividualPage> {
   @override
   Widget build(BuildContext context) {
@@ -73,6 +72,67 @@ class _IndividualPageState extends State<IndividualPage> {
             ];
           })
         ],
+      ),
+      body: Container(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        child: Stack(
+          children: [
+            ListView(),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Row(
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width - 60,
+                      child: Card(
+                        margin: EdgeInsets.only(left: 5, right: 5, bottom: 8),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+                          child: TextFormField(
+                            maxLines: 5,
+                            minLines: 1,
+                            textAlignVertical: TextAlignVertical.center,
+                            keyboardType: TextInputType.multiline,
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: Colors.white,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(30),
+                                borderSide: BorderSide(color: Colors.grey)
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(30),
+                                borderSide: BorderSide(color: Colors.grey.shade300)
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(30),
+                                borderSide: BorderSide(color: Colors.blue)
+                              ),
+                              hintText: "Enter your message",
+                              prefixIcon: IconButton(onPressed: (){}, icon: Icon(Icons.emoji_emotions)),
+                              suffixIcon: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  IconButton(onPressed: (){}, icon: Icon(Icons.attach_file)),
+                                  IconButton(onPressed: (){}, icon: Icon(Icons.camera_alt))
+                                ],
+                              ),
+                              contentPadding: EdgeInsets.all(5)
+                            ),
+                          ))),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 2, left:5, bottom: 8),
+                    child: CircleAvatar(
+                      backgroundColor: Colors.teal,
+                      radius: 25,
+                      child: IconButton(onPressed: (){}, icon: Icon(Icons.mic, color: Colors.white,)),
+                    ),
+                  )
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
