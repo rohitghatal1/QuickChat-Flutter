@@ -1,3 +1,5 @@
+import 'package:firt_flutter_app/Model/ChatModel.dart';
+import 'package:firt_flutter_app/components/ContactCard.dart';
 import 'package:flutter/material.dart';
 
 class SelectContactPage extends StatefulWidget {
@@ -10,6 +12,23 @@ class SelectContactPage extends StatefulWidget {
 class _SelectContactPageState extends State<SelectContactPage> {
   @override
   Widget build(BuildContext context) {
+    List<ChatModel> contacts = [
+      ChatModel(
+          name: "Rohit Ghatal", status: "Frontend Developer"
+      ),
+      ChatModel(
+          name: "Birendra Dhamii", status: "Backend Developer"
+      ),
+      ChatModel(
+          name: "Mahesh Pela", status: "Flutter Developer"
+      ),
+      ChatModel(
+          name: "Tilak Joshi", status: "Dot Net Developer"
+      ),
+      ChatModel(
+          name: "Ashok Buda", status: "Dot Net Developer"
+      ),
+    ];
     return Scaffold(
       appBar: AppBar(
         title: Column(
@@ -23,7 +42,34 @@ class _SelectContactPageState extends State<SelectContactPage> {
             )
           ],
         ),
+        actions: [
+          IconButton(onPressed: (){}, icon: Icon(Icons.search)),
+          PopupMenuButton(itemBuilder: (BuildContext context) {
+            return [
+              PopupMenuItem(
+                child: Text("Invite a friend"),
+                value: "Invite a friend",
+              ),
+              PopupMenuItem(
+                child: Text("Contacts"),
+                value: "Contacts",
+              ),
+              PopupMenuItem(
+                child: Text("Refresh"),
+                value: "Refresh",
+              ),
+              PopupMenuItem(
+                child: Text("Help"),
+                value: "Help",
+              ),
+            ];
+          })
+        ],
       ),
+      body: ListView.builder(
+        itemCount: contacts.length,
+          itemBuilder: (context, index) => ContactCard(contacts: contacts[index])
+      )
     );
   }
 }

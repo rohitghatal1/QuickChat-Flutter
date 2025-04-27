@@ -43,12 +43,12 @@ class _CustomCardState extends State<CustomCard> {
                   width: 3,
                 ),
                 Text(
-                  widget.chatModel.currentMessage,
+                  widget.chatModel.currentMessage ?? "",
                   style: TextStyle(fontSize: 13),
                 )
               ],
             ),
-            trailing: Text(widget.chatModel.time),
+            trailing: Text(widget.chatModel.time ?? ""),
           ),
           Padding(
             padding: const EdgeInsets.only(right: 10, left: 10),

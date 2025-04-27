@@ -32,9 +32,9 @@ class _IndividualPageState extends State<IndividualPage> {
                 radius: 20,
                 backgroundColor: Colors.blueGrey,
                 child: SvgPicture.asset(
-                  widget.chatModel.isGroup
+                  widget.chatModel.icon ?? (widget.chatModel.isGroup == true
                       ? "assets/groupIcon.svg"
-                      : "assets/personIcon.svg",
+                      : "assets/personIcon.svg"),
                   color: Colors.white,
                   height: 36,
                   width: 36,
@@ -56,7 +56,7 @@ class _IndividualPageState extends State<IndividualPage> {
                   style: TextStyle(fontSize: 18.5, fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  widget.chatModel.time,
+                  widget.chatModel.time ?? "",
                   style: TextStyle(fontSize: 13),
                 )
               ],
