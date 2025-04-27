@@ -1,6 +1,8 @@
 import 'package:firt_flutter_app/Model/ChatModel.dart';
+import 'package:firt_flutter_app/Screens/SelectContactPage.dart';
 import 'package:firt_flutter_app/components/customCard.dart';
 import 'package:flutter/material.dart';
+import '';
 
 class ChatPage extends StatefulWidget {
   const ChatPage({super.key});
@@ -46,7 +48,9 @@ class _ChatPageState extends State<ChatPage> {
       floatingActionButton: Padding(
         padding: const EdgeInsets.only(bottom: 30.0, right: 20.0),
         child: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (builder) => SelectContactPage()));
+          },
           child: Icon(Icons.chat),
         ),
       ),
