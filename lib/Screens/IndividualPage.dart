@@ -167,14 +167,15 @@ class _IndividualPageState extends State<IndividualPage> {
 
   Widget BottomModalSheet() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 40),
       child: Container(
-        height: 300,
+        height: 250,
         width: MediaQuery.of(context).size.width,
         child: Card(
           margin: EdgeInsets.all(15),
           child: Column(
             children: [
+              SizedBox(height: 30),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
