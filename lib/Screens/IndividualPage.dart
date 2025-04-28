@@ -167,9 +167,9 @@ class _IndividualPageState extends State<IndividualPage> {
 
   Widget BottomModalSheet() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
       child: Container(
-        height: 250,
+        height: 300,
         width: MediaQuery.of(context).size.width,
         child: Card(
           margin: EdgeInsets.all(15),
@@ -212,7 +212,7 @@ class _IndividualPageState extends State<IndividualPage> {
       child: Column(
         children: [
           CircleAvatar(
-            radius: 30,
+            radius: 23,
             backgroundColor: color,
             child: Icon(icon, color: Colors.white, size: 29),
           ),

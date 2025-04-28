@@ -1,4 +1,5 @@
 import 'package:firt_flutter_app/Model/ChatModel.dart';
+import 'package:firt_flutter_app/components/ButtonCard.dart';
 import 'package:firt_flutter_app/components/ContactCard.dart';
 import 'package:flutter/material.dart';
 
@@ -68,7 +69,15 @@ class _SelectContactPageState extends State<SelectContactPage> {
       ),
       body: ListView.builder(
         itemCount: contacts.length,
-          itemBuilder: (context, index) => ContactCard(contacts: contacts[index])
+          itemBuilder: (context, index){
+          if(index == 0){
+            return ButtonCard(icon: Icons.group, name:  "New Group");
+          } else if (index == 1){
+            return ButtonCard(icon: Icons.person_add, name: "New Contact");
+          }
+          return ContactCard(contacts: contacts[index - 2]);
+
+          }
       )
     );
   }
