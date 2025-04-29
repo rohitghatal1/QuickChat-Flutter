@@ -47,39 +47,60 @@ class _CreateGroupPageState extends State<CreateGroupPage> {
         body: Stack(
           children: [
             ListView.builder(
-                itemCount: contacts.length,
+                itemCount: contacts.length + 1,
                 itemBuilder: (context, index) {
+                  if(index == 0){
+                    return Container(
+                      height: groups.length > 0 ? 90 : 10,
+                    );
+                  }
                   return InkWell(
                       onTap: () {
-                        if (contacts[index].selected == false) {
+                        if (contacts[index - 1].selected == false) {
                           setState(() {
-                            contacts[index].selected = true;
-                            groups.add(contacts[index]);
+                            contacts[index- 1].selected = true;
+                            groups.add(contacts[index - 1]);
                           });
                         } else {
                           setState(() {
-                            contacts[index].selected = false;
-                            groups.remove(contacts[index]);
+                            contacts[index - 1].selected = false;
+                            groups.remove(contacts[index - 1]);
                           });
                         }
                       },
-                      child: ContactCard(contacts: contacts[index]));
+                      child: ContactCard(contacts: contacts[index - 1]));
                 }
-                ),
-            Column(
+            ),
+            groups.length > 0 ? Column(
               children: [
                 Container(
                   height: 75,
                   color: Colors.white,
                   child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
+                      scrollDirection: Axis.horizontal,
                       itemCount: contacts.length,
-                      itemBuilder: (context, index) => Avatarcard()
+                      itemBuilder: (context, index) {
+                        if (contacts[index].selected == true) {
+                          return InkWell(
+                            onTap: (){
+                              setState(() {
+                                groups.remove(contacts[index]);
+                                contacts[index].selected = false;
+                              });
+                            },
+                            child: Avatarcard(
+                                contact: contacts[index]
+                            ),
+                          );
+                        } else {
+                          return Container();
+                        }
+                      }
                   ),
                 ),
                 Divider(thickness: 1,)
               ],
-            )
+            ): Container(),
           ],
         ));
   }

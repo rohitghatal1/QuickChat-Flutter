@@ -1,9 +1,10 @@
+import 'package:firt_flutter_app/Model/ChatModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class Avatarcard extends StatelessWidget {
-  const Avatarcard({super.key});
-
+  const Avatarcard({Key? key, required this.contact}) : super(key: key);
+  final ChatModel contact;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -15,7 +16,7 @@ class Avatarcard extends StatelessWidget {
             children: [
               CircleAvatar(
                 radius: 25,
-                child: SvgPictureture.asset("assets/personIcon.svg",
+                child: SvgPicture.asset("assets/personIcon.svg",
                     color: Colors.white),
                 backgroundColor: Colors.blueGrey.shade200,
               ),
@@ -34,7 +35,10 @@ class Avatarcard extends StatelessWidget {
             ],
           ),
           SizedBox(height: 2),
-          Text("name", style: TextStyle(fontSize: 12),),
+          Text(
+            contact.name,
+            style: TextStyle(fontSize: 12),
+          ),
         ],
       ),
     );
