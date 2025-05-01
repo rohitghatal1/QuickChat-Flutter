@@ -1,8 +1,14 @@
+import 'package:camera/camera.dart';
+import 'package:firt_flutter_app/Screens/CameraScreen.dart';
 import 'package:firt_flutter_app/Screens/HomeScreen.dart';
 import 'package:firt_flutter_app/userLogin.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+Future<void> main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+
+  cameras = await availableCameras();
+
   runApp(MaterialApp(
     theme: ThemeData(
         fontFamily: "Poppins",
