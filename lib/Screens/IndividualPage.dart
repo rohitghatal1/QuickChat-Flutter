@@ -98,12 +98,15 @@ class _IndividualPageState extends State<IndividualPage> {
             width: MediaQuery.of(context).size.width,
             child: Stack(
               children: [
-                ListView(
-                  shrinkWrap: true,
-                  children: [
-                    MyMessageCard(),
-                    OthersMessageCard()
-                  ],
+                Container(
+                  height: MediaQuery.of(context).size.height - 140,
+                  child: ListView(
+                    shrinkWrap: true,
+                    children: [
+                      MyMessageCard(),
+                      OthersMessageCard()
+                    ],
+                  ),
                 ),
                 Align(
                   alignment: Alignment.bottomCenter,
