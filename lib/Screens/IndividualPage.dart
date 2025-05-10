@@ -1,4 +1,6 @@
 import 'package:firt_flutter_app/Model/ChatModel.dart';
+import 'package:firt_flutter_app/components/MyMessageCard.dart';
+import 'package:firt_flutter_app/components/OthersMessageCard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -96,7 +98,13 @@ class _IndividualPageState extends State<IndividualPage> {
             width: MediaQuery.of(context).size.width,
             child: Stack(
               children: [
-                ListView(),
+                ListView(
+                  shrinkWrap: true,
+                  children: [
+                    MyMessageCard(),
+                    OthersMessageCard()
+                  ],
+                ),
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: Row(
