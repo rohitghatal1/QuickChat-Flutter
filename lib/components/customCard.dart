@@ -1,61 +1,78 @@
-import 'package:firt_flutter_app/Model/ChatModel.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
+import '../Model/ChatModel.dart';
 import '../Screens/IndividualPage.dart';
 
-class CustomCard extends StatefulWidget {
-  const CustomCard({Key? key, required this.chatModel}) : super(key: key);
-  final ChatModel chatModel;
+class CustomCard extends StatelessWidget {
+  const CustomCard({Key? key, this.chatModel, this.sourchat}) : super(key: key);
 
-  @override
-  State<CustomCard> createState() => _CustomCardState();
-}
+  final ChatModel? chatModel;
+  final ChatModel? sourchat;
 
-class _CustomCardState extends State<CustomCard> {
   @override
   Widget build(BuildContext context) {
+    // Handling null checks at the top for cleaner code
+    final bool isGroup = chatModel?.isGroup ?? false;
+    final String name = chatModel?.name ?? 'Unknown';
+    final String currentMessage = chatModel?.currentMessage ?? 'No messages yet';
+    final String time = chatModel?.time ?? '';
+
     return InkWell(
-      onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => IndividualPage(chatModel: widget.chatModel,)));
+      onTap: () {
+        if (chatModel != null && sourchat != null) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => IndividualPage(
+                chatModel: chatModel!,
+                sourchat: sourchat!,
+              ),
+            ),
+          );
+        }
       },
       child: Column(
         children: [
           ListTile(
             leading: CircleAvatar(
-              radius: 25,
-              backgroundColor: Colors.blueGrey,
+              radius: 30,
               child: SvgPicture.asset(
-                "assets/${widget.chatModel.icon}",
-                width: 35,
-                height: 35,
+                isGroup ? "assets/groups.svg" : "assets/person.svg",
                 color: Colors.white,
+                height: 36,
+                width: 36,
               ),
-
+              backgroundColor: Colors.blueGrey,
             ),
             title: Text(
-              widget.chatModel.name,
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+              name,
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             subtitle: Row(
               children: [
-                Icon(Icons.done_all),
-                SizedBox(
-                  width: 3,
-                ),
+                const Icon(Icons.done_all),
+                const SizedBox(width: 3),
                 Text(
-                  widget.chatModel.currentMessage ?? "",
-                  style: TextStyle(fontSize: 13),
-                )
+                  currentMessage,
+                  style: const TextStyle(
+                    fontSize: 13,
+                  ),
+                ),
               ],
             ),
-            trailing: Text(widget.chatModel.time ?? ""),
+            trailing: Text(time),
           ),
-          Padding(
-            padding: const EdgeInsets.only(right: 10, left: 10),
+          const Padding(
+            padding: EdgeInsets.only(right: 20, left: 80),
             child: Divider(
               thickness: 1,
             ),
-          )
+          ),
         ],
       ),
     );

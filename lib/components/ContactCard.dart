@@ -1,47 +1,64 @@
-import 'package:firt_flutter_app/Model/ChatModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../Model/ChatModel.dart';
+
 class ContactCard extends StatelessWidget {
-  const ContactCard({Key? key, required this.contacts}) : super(key: key);
-  final ChatModel contacts;
+  const ContactCard({Key? key, this.contact}) : super(key: key);
+  final ChatModel? contact;
 
   @override
   Widget build(BuildContext context) {
+    // Safely extracting values with null checks and fallbacks
+    final String name = contact?.name ?? 'Unknown Contact';
+    final String status = contact?.status ?? 'No status available';
+    final bool isSelected = contact?.selected ?? false;
+
     return ListTile(
       leading: Container(
-        height: 53,
         width: 50,
+        height: 53,
         child: Stack(
           children: [
             CircleAvatar(
-              radius: 25,
-              child:
-                  SvgPicture.asset("assets/personIcon.svg", color: Colors.white),
-              backgroundColor: Colors.blueGrey.shade200,
+              radius: 23,
+              child: SvgPicture.asset(
+                "assets/person.svg",
+                color: Colors.white,
+                height: 30,
+                width: 30,
+              ),
+              backgroundColor: Colors.blueGrey[200],
             ),
-            (contacts.selected ?? false) ? Positioned(
-              bottom: 4,
-              right: 5,
-              child: CircleAvatar(
+            if (isSelected)
+              Positioned(
+                bottom: 4,
+                right: 5,
+                child: CircleAvatar(
                   backgroundColor: Colors.teal,
                   radius: 11,
-                  child: Icon(
+                  child: const Icon(
                     Icons.check,
                     color: Colors.white,
                     size: 18,
-                  )),
-            ) : Container()
+                  ),
+                ),
+              ),
           ],
         ),
       ),
       title: Text(
-        contacts.name,
-        style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+        name,
+        style: const TextStyle(
+          fontSize: 15,
+          fontWeight: FontWeight.bold,
+        ),
       ),
       subtitle: Text(
-        contacts.status ?? "",
-        style: TextStyle(fontSize: 13),
+        status,
+        style: const TextStyle(
+          fontSize: 13,
+        ),
       ),
     );
   }

@@ -43,6 +43,7 @@ dependencies:
 
   # File path manipulation
   path: ^1.8.3
+  socket_io_client: ^3.1.2
 #  emoji_picker_flutter: ^4.3.0
 #  shared_preferences: ^2.5.3
 
