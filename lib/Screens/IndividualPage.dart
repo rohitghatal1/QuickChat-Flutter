@@ -1,12 +1,11 @@
-
-import 'package:chatapp/CustomUI/ReplyCard.dart';
-import 'package:chatapp/Model/ChatModel.dart';
-import 'package:chatapp/Model/MessageModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
-import '../CustomUI/OwnMessgaeCrad.dart';
+import '../Model/ChatModel.dart';
+import '../Model/MessageModel.dart';
+import '../components/MyMessageCard.dart';
+import '../components/OthersMessageCard.dart';
 
 class IndividualPage extends StatefulWidget {
   const IndividualPage({Key? key, this.chatModel, this.sourchat}) : super(key: key);

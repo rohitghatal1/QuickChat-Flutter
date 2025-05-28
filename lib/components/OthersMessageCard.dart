@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
-class OthersMessageCard extends StatelessWidget {
-  const OthersMessageCard({super.key});
+class ReplyCard extends StatelessWidget {
+  const ReplyCard({Key? key,  this.message,  this.time}) : super(key: key);
+  final String? message;
+  final String? time;
 
   @override
   Widget build(BuildContext context) {
@@ -14,25 +16,35 @@ class OthersMessageCard extends StatelessWidget {
         child: Card(
           elevation: 1,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+          // color: Color(0xffdcf8c6),
           margin: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
           child: Stack(
             children: [
               Padding(
                 padding: const EdgeInsets.only(
-                    left: 10, right: 60, top: 5, bottom: 20),
+                  left: 8,
+                  right: 50,
+                  top: 5,
+                  bottom: 10,
+                ),
                 child: Text(
-                  "Hello",
-                  style: TextStyle(fontSize: 16),
+                  message!,
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
                 ),
               ),
               Positioned(
-                right: 10,
                 bottom: 4,
+                right: 10,
                 child: Text(
-                  "12: 50",
-                  style: TextStyle(fontSize: 13, color: Colors.grey),
+                  time!,
+                  style: TextStyle(
+                    fontSize: 13,
+                    color: Colors.grey[600],
+                  ),
                 ),
-              )
+              ),
             ],
           ),
         ),

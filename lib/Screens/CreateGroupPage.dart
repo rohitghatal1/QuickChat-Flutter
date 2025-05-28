@@ -1,27 +1,31 @@
-import 'package:firt_flutter_app/Model/ChatModel.dart';
-import 'package:firt_flutter_app/components/AvatarCard.dart';
-import 'package:firt_flutter_app/components/ButtonCard.dart';
-import 'package:firt_flutter_app/components/ContactCard.dart';
 import 'package:flutter/material.dart';
 
-class CreateGroupPage extends StatefulWidget {
-  const CreateGroupPage({super.key});
+import '../Model/ChatModel.dart';
+import '../components/AvatarCard.dart';
+import '../components/ContactCard.dart';
+
+class CreateGroup extends StatefulWidget {
+  CreateGroup({Key? key}) : super(key: key);
 
   @override
-  State<CreateGroupPage> createState() => _CreateGroupPageState();
+  _CreateGroupState createState() => _CreateGroupState();
 }
 
-class _CreateGroupPageState extends State<CreateGroupPage> {
+class _CreateGroupState extends State<CreateGroup> {
   List<ChatModel> contacts = [
-    ChatModel(name: "Rohit Ghatal", status: "Frontend Developer"),
-    ChatModel(name: "Birendra Dhamii", status: "Backend Developer"),
-    ChatModel(name: "Mahesh Pela", status: "Flutter Developer"),
-    ChatModel(name: "Tilak Joshi", status: "Dot Net Developer"),
-    ChatModel(name: "Ashok Buda", status: "Dot Net Developer"),
+    ChatModel(name: "Dev Stack", status: "A full stack developer"),
+    ChatModel(name: "Balram", status: "Flutter Developer..........."),
+    ChatModel(name: "Saket", status: "Web developer..."),
+    ChatModel(name: "Bhanu Dev", status: "App developer...."),
+    ChatModel(name: "Collins", status: "Raect developer.."),
+    ChatModel(name: "Kishor", status: "Full Stack Web"),
+    ChatModel(name: "Testing1", status: "Example work"),
+    ChatModel(name: "Testing2", status: "Sharing is caring"),
+    ChatModel(name: "Divyanshu", status: "....."),
+    ChatModel(name: "Helper", status: "Love you Mom Dad"),
+    ChatModel(name: "Tester", status: "I find the bugs"),
   ];
-
-  List<ChatModel> groups = [];
-
+  List<ChatModel> groupmember = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,75 +36,93 @@ class _CreateGroupPageState extends State<CreateGroupPage> {
             children: [
               Text(
                 "New Group",
-                style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  fontSize: 19,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               Text(
                 "Add participants",
-                style: TextStyle(fontSize: 14),
+                style: TextStyle(
+                  fontSize: 13,
+                ),
               )
             ],
           ),
           actions: [
-            IconButton(onPressed: () {}, icon: Icon(Icons.search)),
+            IconButton(
+                icon: Icon(
+                  Icons.search,
+                  size: 26,
+                ),
+                onPressed: () {}),
           ],
         ),
+        floatingActionButton: FloatingActionButton(
+            backgroundColor: Color(0xFF128C7E),
+            onPressed: () {},
+            child: Icon(Icons.arrow_forward)),
         body: Stack(
           children: [
             ListView.builder(
                 itemCount: contacts.length + 1,
                 itemBuilder: (context, index) {
-                  if(index == 0){
+                  if (index == 0) {
                     return Container(
-                      height: groups.length > 0 ? 90 : 10,
+                      height: groupmember.length > 0 ? 90 : 10,
                     );
                   }
                   return InkWell(
-                      onTap: () {
-                        if (contacts[index - 1].selected == false) {
-                          setState(() {
-                            contacts[index- 1].selected = true;
-                            groups.add(contacts[index - 1]);
-                          });
+                    onTap: () {
+                      setState(() {
+                        if (contacts[index - 1].selected == true) {
+                          groupmember.remove(contacts[index - 1]);
+                          contacts[index - 1].selected = false;
                         } else {
-                          setState(() {
-                            contacts[index - 1].selected = false;
-                            groups.remove(contacts[index - 1]);
-                          });
+                          groupmember.add(contacts[index - 1]);
+                          contacts[index - 1].selected = true;
                         }
-                      },
-                      child: ContactCard(contacts: contacts[index - 1]));
-                }
-            ),
-            groups.length > 0 ? Column(
-              children: [
-                Container(
-                  height: 75,
-                  color: Colors.white,
-                  child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: contacts.length,
-                      itemBuilder: (context, index) {
-                        if (contacts[index].selected == true) {
-                          return InkWell(
-                            onTap: (){
-                              setState(() {
-                                groups.remove(contacts[index]);
-                                contacts[index].selected = false;
-                              });
-                            },
-                            child: Avatarcard(
-                                contact: contacts[index]
-                            ),
-                          );
-                        } else {
+                      });
+                    },
+                    child: ContactCard(
+                      contact: contacts[index - 1],
+                    ),
+                  );
+                }),
+            groupmember.length > 0
+                ? Align(
+              child: Column(
+                children: [
+                  Container(
+                    height: 75,
+                    color: Colors.white,
+                    child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: contacts.length,
+                        itemBuilder: (context, index) {
+                          if (contacts[index].selected == true)
+                            return InkWell(
+                              onTap: () {
+                                setState(() {
+                                  groupmember.remove(contacts[index]);
+                                  contacts[index].selected = false;
+                                });
+                              },
+                              child: AvatarCard(
+                                chatModel: contacts[index],
+                              ),
+                            );
                           return Container();
-                        }
-                      }
+                        }),
                   ),
-                ),
-                Divider(thickness: 1,)
-              ],
-            ): Container(),
+                  Divider(
+                    thickness: 1,
+                  ),
+                ],
+              ),
+              alignment: Alignment.topCenter,
+            )
+                : Container(),
           ],
         ));
   }

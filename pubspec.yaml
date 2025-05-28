@@ -37,6 +37,7 @@ dependencies:
   flutter_svg: ^2.1.0
   # Camera plugin
   camera: ^0.11.1
+  video_player: ^2.9.5
 
   # Accessing device paths (update to latest compatible)
   path_provider: ^2.1.2

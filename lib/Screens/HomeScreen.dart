@@ -1,67 +1,95 @@
-import "package:firt_flutter_app/Pages/CameraPage.dart";
-import "package:firt_flutter_app/Pages/ChatPage.dart";
-import "package:flutter/material.dart";
+import 'package:flutter/material.dart';
+
+import '../Model/ChatModel.dart';
+import '../Pages/CameraPage.dart';
+import '../Pages/ChatPage.dart';
 
 class Homescreen extends StatefulWidget {
-  const Homescreen({super.key});
+  Homescreen({Key? key, this.chatmodels, this.sourchat}) : super(key: key);
+  final List<ChatModel>? chatmodels;
+  final ChatModel? sourchat;
 
   @override
-  State<Homescreen> createState() => _HomescreenState();
+  _HomescreenState createState() => _HomescreenState();
 }
 
-class _HomescreenState extends State<Homescreen> with SingleTickerProviderStateMixin {
+class _HomescreenState extends State<Homescreen>
+    with SingleTickerProviderStateMixin {
   late TabController _controller;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _controller = TabController(length: 4, vsync: this, initialIndex: 1);
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("QuickChat"),
+        title: Text("Whatsapp Clone"),
         actions: [
-          IconButton(onPressed: (){}, icon: Icon(Icons.search)),
-         PopupMenuButton<String>(
-           onSelected: (value){
-             print(value);
-           },
-             itemBuilder: (BuildContext context){
-           return [
-             PopupMenuItem(child: Text("New Group"), value: "New Group",),
-             PopupMenuItem(child: Text("Starred Messages"), value: "Starred Messages",),
-             PopupMenuItem(child: Text("Settings"), value: "Settings",),
-           ];
-         })
+          IconButton(icon: Icon(Icons.search), onPressed: () {}),
+          PopupMenuButton<String>(
+            onSelected: (value) {
+              print(value);
+            },
+            itemBuilder: (BuildContext contesxt) {
+              return [
+                PopupMenuItem(
+                  child: Text("New group"),
+                  value: "New group",
+                ),
+                PopupMenuItem(
+                  child: Text("New broadcast"),
+                  value: "New broadcast",
+                ),
+                PopupMenuItem(
+                  child: Text("Whatsapp Web"),
+                  value: "Whatsapp Web",
+                ),
+                PopupMenuItem(
+                  child: Text("Starred messages"),
+                  value: "Starred messages",
+                ),
+                PopupMenuItem(
+                  child: Text("Settings"),
+                  value: "Settings",
+                ),
+              ];
+            },
+          )
         ],
         bottom: TabBar(
           controller: _controller,
+          indicatorColor: Colors.white,
           tabs: [
             Tab(
               icon: Icon(Icons.camera_alt),
             ),
             Tab(
-              text: "Chats",
+              text: "CHATS",
             ),
             Tab(
-              text: "Status",
+              text: "STATUS",
             ),
             Tab(
-              text: "Calls",
+              text: "CALLS",
             )
           ],
         ),
       ),
       body: TabBarView(
         controller: _controller,
-          children: [
-        CameraPage(),
-        ChatPage(),
-        Text("Status"),
-        Text("Calls"),
-      ]),
+        children: [
+          CameraPage(),
+          ChatPage(
+            chatmodels: widget.chatmodels,
+            sourchat: widget.sourchat,
+          ),
+          Text("STATUS"),
+          Text("Calls"),
+        ],
+      ),
     );
   }
 }
